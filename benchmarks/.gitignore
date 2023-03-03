@@ -1,0 +1,12 @@
+MLB
+report*.json
+*.out
+*.exe.out
+*.exe.out.*
+*.exe
+*~
+*.pct
+*.frag
+run
+region.pdf
+region.ps
