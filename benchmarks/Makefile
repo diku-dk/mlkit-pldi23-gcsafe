@@ -49,11 +49,12 @@ report.json:
 	@grep 'Spurious instantiations' $< | sed -n -E -e 's/.*: ([0-9]+) \/ ([0-9]+)/\2/p' | awk '{s+=$$1} END {print s}' | tr -d '\n' >> $@
 	@/bin/echo -n ' & ' >> $@
 	@(diff -q $*.spurious.no.log $*.spurious.yes.log; /bin/echo -n $$? | sed 's/1/x/' | sed 's/0//' >> $@)
+	@/bin/echo '' >> $@
 
 SPURIOUS_FILES=$(BENCHFILES:%=%.spurious)
 
 static.tmp: $(SPURIOUS_FILES)
-	/bin/echo 'Program & LoC & Spur. funs. & Spur. insts. & Code diff' > $@
+	/bin/echo 'Program & LoC & Spur. fcns. & Spur. insts. & Code diff' > $@
 	cat $^ >> $@
 
 .PHONY: static
@@ -61,7 +62,7 @@ static: static.txt
 	cat $<
 
 static.txt: static.tmp
-	cat $< | column -t -s'&'
+	cat $< | column -t -s'&' > $@
 
 .PHONY: dynamic
 dynamic: dynamic.txt
@@ -71,7 +72,6 @@ dynamic.txt: report.json
 	@$(MLKIT_PRESS) -sn -d real -d rss -d gcn -skip1 \
            -merge_rows cname \
            -c pname \
-           -c plen \
            -c 'real # rg' \
            -c 'real # rg-' \
            -c 'real # r' \
