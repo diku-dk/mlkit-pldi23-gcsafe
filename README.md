@@ -46,10 +46,10 @@ and its purpose.
 
 * `benchmarks/`: The benchmark programs and a Makefile containing
   targets for compiling and executing the benchmarks with MLton and
-  different configurations of the MLKit. The Makefile taget `all` runs
-  the target `static`, which produces a file `static.txt`
-  corresponding to the first four columns of Figure 9 of the paper, and
-  a target `dynamic`, which produces a file `dynamic.txt`
+  different configurations of the MLKit. The Makefile target `all`
+  runs the target `static`, which produces a file `static.txt`
+  corresponding to the first four columns of Figure 9 of the paper,
+  and a target `dynamic`, which produces a file `dynamic.txt`
   corresponding to the remaining columns of Figure 9.
 
 * `tools/`: Various SML programs that constitute the experimental
