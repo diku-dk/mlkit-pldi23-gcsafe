@@ -1,17 +1,33 @@
 # Artifact for the paper *Garbage-Collection Safety for Region-Based Type-Polymorphic Programs* submitted to PLDI 2023
 
-This artifact reproduces the date shown in Figure 9 of the paper.
+This artifact reproduces the content of Figure 9 of the paper.
 
 The results shown in Figure 9 of the paper were computed on a MacBook
 Pro (15-inch, 2016) with a 2.7GHz Intel Core i7 processor and 16GB of
-memory, running macOS. The precise results you obtain are likely to be
-somewhat different unless you use the same hardware.  Hopefully the
-general trends will remain stable, in particular with respect to the
-compilation (static) measurements.
+memory, running macOS 12.4.
 
 Simply running `make` should compile and run all benchmarks and
-produce the files `static.txt` and `dynamic.txt`, corresponding to
-information contained in Figure 9 of the paper.
+produce a file `static.txt`, with benchmark results for the first four
+columns of Figure 9 of the paper, and a file `dynamic.txt` with
+benchmark results for the remaining columns of Figure 9.
+
+The precise results contained in the file `static.txt` should match
+closely the results of the submitted paper, as the compilation results
+are indifferent to the hardware and operating system on (or for) which
+the benchmarks are compiled. On the other hand, the precise results
+contained in the file `dynamic.txt` are likely to be somewhat
+different from those in the paper unless you use similar
+hardware. Hopefully, however, the general trends will remain stable.
+
+Caveat: The versions of MLKit and MLton have changed for this artifact
+compared to the submitted version of the paper). The final version of
+the paper will report on the versions used for this artifact (MLKit
+4.7.3 and MLton 20210117). Except for a few instances, the reported
+numbers in the submitted paper are similar to those that can be
+produced with this artifact. The main difference is that, for the
+`zebra` benchmark, we now see a difference in the number of garbage
+collections for the different configurations `rg` and `rg-`. This
+difference will be discussed in the paper.
 
 ## System Requirements
 
@@ -58,8 +74,8 @@ and its purpose.
 
   (Again, might need `sudo`.)
 
-  Note that the Dockerfile is *not* reproducible, so it may or may not
-  result in a working image if you try this in the distant future.
+  Notice that the Dockerfile is *not* reproducible, so it may or may
+  not result in a working image if you try this in the distant future.
 
   The image can be saved to a file with:
 
