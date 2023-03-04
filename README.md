@@ -80,7 +80,7 @@ and its purpose.
   The image can be saved to a file with:
 
   ```
-  $ docker save mlkit-pldi23-gcsafe | gzip > mlkit-pldi23-gcsafe.gz
+  $ docker save mlkit-pldi23-gcsafe | gzip > mlkit-pldi23-gcsafe.tar.gz
   ```
 
   On another machine, the image can then be loaded from the file:
