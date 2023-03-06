@@ -1,5 +1,30 @@
 # Artifact for the paper *Garbage-Collection Safety for Region-Based Type-Polymorphic Programs* submitted to PLDI 2023
 
+## Getting Started
+
+The artifact comprises a Docker image `mlkit-pldi23-gcsafe.tar.gz`.
+Depending on your system, `docker` commands might or might not need to
+be prefixed with `sudo`.  In the following we will leave off `sudo`,
+but you may have to add it yourself.
+
+You can load the Docker image into Docker with:
+
+```
+$ docker load -i mlkit-pldi23-gcsafe.tar.gz
+```
+
+You can then run the image with:
+
+```
+$ docker run -it mlkit-pldi23-gcsafe:latest
+```
+
+This will put you into a shell inside a directory containing the
+experimental infrastructure.  Run `make` to begin benchmarking.  If it
+stays running for a few minutes, then everything likely works.
+
+## Step by Step Instructions
+
 This artifact reproduces the content of Figure 9 of the paper.
 
 The results shown in Figure 9 of the paper were computed on a MacBook
@@ -7,9 +32,11 @@ Pro (15-inch, 2016) with a 2.7GHz Intel Core i7 processor and 16GB of
 memory, running macOS 12.4.
 
 Simply running `make` should compile and run all benchmarks and
-produce a file `static.txt`, with benchmark results for the first four
-columns of Figure 9 of the paper, and a file `dynamic.txt` with
-benchmark results for the remaining columns of Figure 9.
+produce a file `benchmarks/static.txt`, with benchmark results for the
+first four columns of Figure 9 of the paper, and a file
+`benchmarks/dynamic.txt` with benchmark results for the remaining
+columns of Figure 9. It takes about 20min to run all the benchmarks
+(and produce the two files), depending on your hardware.
 
 The precise results contained in the file `static.txt` should match
 closely the results of the submitted paper, as the compilation results
@@ -19,15 +46,16 @@ contained in the file `dynamic.txt` are likely to be somewhat
 different from those in the paper unless you use similar
 hardware. Hopefully, however, the general trends will remain stable.
 
-Caveat: The versions of MLKit and MLton have changed for this artifact
-compared to the submitted version of the paper). The final version of
-the paper will report on the versions used for this artifact (MLKit
-4.7.3 and MLton 20210117). Except for a few instances, the reported
-numbers in the submitted paper are similar to those that can be
-produced with this artifact. The main difference is that, for the
-`zebra` benchmark, we now see a difference in the number of garbage
-collections for the different configurations `rg` and `rg-`. This
-difference will be discussed in the paper.
+**Caveat:** The versions of MLKit and MLton have changed for this
+artifact compared to the submitted version of the paper). The final
+version of the paper will report on the versions used for this
+artifact (MLKit 4.7.3 and MLton 20210117). Except for a few instances,
+the reported numbers in the submitted paper are similar to those that
+can be produced with this artifact. The main difference is that, for
+the `zebra` benchmark, we now see a difference in the number of
+garbage collections for the different configurations `rg` and
+`rg-`. This difference will be discussed in the final version of the
+paper.
 
 ## System Requirements
 
@@ -38,6 +66,15 @@ container has all this set up already.
 
 Constructing the image from `Dockerfile` requires access to the
 Internet, but running `make` does not.
+
+## Docker Image
+
+For space reasons, the Docker image is very sparse and does not have
+e.g. text editors installed.  The user account has passwordless `sudo`
+so you can install more things if you want.  Otherwise you can use
+commands such as `docker cp` to move data out of the image for
+inspection on the host system.  Consult your favourite search engine
+for information on how to use Docker if you are unfamiliar.
 
 ## Manifest
 
@@ -57,39 +94,10 @@ and its purpose.
 
 * `Dockerfile`: The file used to build the Docker image.  You should
   use the prebuilt image if possible, but if necessary you can build
-  it yourself with the following command:
-
-  ```
-  $ docker build . -t mlkit-pldi23-gcsafe
-  ```
-
-  (You might need `sudo`, depending on your system.)
-
-  The `-t mlkit-pldi23-gcsafe` assigns a tag to the image in your
-  local Docker registry.  You can run the built image with:
-
-  ```
-  $ docker run -it mlkit-pldi23-gcsafe:latest
-  ```
-
-  (Again, might need `sudo`.)
+  it yourself with `make mlkit-pldi23-gcsafe.tar.gz` (uses `sudo`).
 
   Notice that the Dockerfile is *not* reproducible, so it may or may
   not result in a working image if you try this in the distant future.
-
-  The image can be saved to a file with:
-
-  ```
-  $ docker save mlkit-pldi23-gcsafe | gzip > mlkit-pldi23-gcsafe.tar.gz
-  ```
-
-  On another machine, the image can then be loaded from the file:
-
-  ```
-  $ docker load -i mlkit-pldi23-gcsafe.tar.gz
-  ```
-
-  This file is what we distribute as the "reproducible" artifact.
 
 * `Makefile`: The commands executed when running `make`.  You can
   extract the commands if you need to run them out of order.
