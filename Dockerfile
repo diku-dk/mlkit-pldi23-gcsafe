@@ -38,4 +38,10 @@ RUN mkdir mlkit-pldi23-gcsafe
 COPY --chown=bench ./ mlkit-pldi23-gcsafe/
 
 WORKDIR /home/bench/mlkit-pldi23-gcsafe
+
+# Install MLKit src
+ADD --chown=bench https://github.com/melsman/mlkit/archive/refs/tags/v4.7.3.tar.gz ./
+RUN tar xf v4.7.3.tar.gz
+RUN rm -f v4.7.3.tar.gz
+
 CMD bash

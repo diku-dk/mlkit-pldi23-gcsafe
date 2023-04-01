@@ -67,6 +67,26 @@ container has all this set up already.
 Constructing the image from `Dockerfile` requires access to the
 Internet, but running `make` does not.
 
+### Building MLKit from Source
+
+The Docker image contains source code for MLKit v4.7.3, which is
+located in the folder `mlkit-4.7.3`. As an optional first
+step (before running the benchmarks), it is possible to compile and
+install the MLKit from source, using the following steps (ignore the
+possible error by `autobuild`):
+
+```
+$ cd mlkit-4.7.3
+$ ./autobuild
+$ ./configure --with-compiler=mlkit --prefix=/home/bench/mlkit
+$ make mlkit && make mlkit_basislibs
+$ make install
+$ cd ..
+```
+
+These steps will overwrite the binary MLKit installation with a
+bootstrapped version of the MLKit.
+
 ## Docker Image
 
 For space reasons, the Docker image is very sparse and does not have
@@ -101,3 +121,7 @@ and its purpose.
 
 * `Makefile`: The commands executed when running `make`.  You can
   extract the commands if you need to run them out of order.
+
+* `mlkit-4.7.3`: Source directory for MLKit v4.7.3, which is the
+  source for the binary version of the MLKit, installed in the Docker
+  image.
