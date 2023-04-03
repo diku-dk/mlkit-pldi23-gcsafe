@@ -46,17 +46,6 @@ contained in the file `dynamic.txt` are likely to be somewhat
 different from those in the paper unless you use similar
 hardware. Hopefully, however, the general trends will remain stable.
 
-**Caveat:** The versions of MLKit and MLton have changed for this
-artifact compared to the submitted version of the paper). The final
-version of the paper will report on the versions used for this
-artifact (MLKit 4.7.3 and MLton 20210117). Except for a few instances,
-the reported numbers in the submitted paper are similar to those that
-can be produced with this artifact. The main difference is that, for
-the `zebra` benchmark, we now see a difference in the number of
-garbage collections for the different configurations `rg` and
-`rg-`. This difference will be discussed in the final version of the
-paper.
-
 ## System Requirements
 
 The artifact assumes that `mlkit`, and `mlton` are immediately
@@ -70,8 +59,8 @@ Internet, but running `make` does not.
 ### Building MLKit from Source
 
 The Docker image contains source code for MLKit v4.7.3, which is
-located in the folder `mlkit-4.7.3`. As an optional first
-step (before running the benchmarks), it is possible to compile and
+located in the folder `mlkit-4.7.3`. As an **optional first
+step** (before running the benchmarks), it is possible to compile and
 install the MLKit from source, using the following steps (ignore the
 possible error by `autobuild`):
 
